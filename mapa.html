@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapa · A Representatividade Étnica na Música Gaúcha</title>
+  <meta name="description" content="Mapa interativo e temporal dos povos que formaram o Rio Grande do Sul.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&family=Parisienne&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-pagina="mapa">
+<main id="conteudo">
+  <section class="secao secao-topo">
+    <div class="container">
+      <div class="mapa-grid">
+        <div class="mapa-texto">
+          <span class="eyebrow">Mapa interativo</span>
+          <h1>Um estado, muitas histórias</h1>
+          <p class="lead">O Rio Grande do Sul é formado por diferentes povos, culturas e tradições. Avance na linha do tempo e clique em cada região para descobrir quando cada grupo chegou e com o que contribuiu para a formação do nosso estado.</p>
+        </div>
+
+        <div class="mapa-palco">
+          <figure class="mapa-figura" id="mapa" aria-label="Mapa do Rio Grande do Sul"></figure>
+          <svg class="rosa-ventos" viewBox="0 0 120 132" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><text x="60" y="11" text-anchor="middle" font-family="Playfair Display, serif" font-size="13" fill="currentColor" stroke="none">N</text><circle cx="60" cy="72" r="34"/><circle cx="60" cy="72" r="41" stroke-dasharray="1.5 4"/><path d="M60 72 L75 57 M60 72 L75 87 M60 72 L45 87 M60 72 L45 57"/><path d="M60 18 L67 65 L114 72 L67 79 L60 126 L53 79 L6 72 L53 65 Z" fill="#f7f3e9"/><path d="M60 18 L67 65 L60 72 Z M114 72 L67 79 L60 72 Z M60 126 L53 79 L60 72 Z M6 72 L53 65 L60 72 Z" fill="currentColor" stroke="none" opacity=".6"/><circle cx="60" cy="72" r="3" fill="currentColor"/></svg>
+        </div>
+
+        <div class="mapa-lateral">
+          <article class="mapa-card" id="card" aria-live="polite" hidden></article>
+          <ul class="legenda-povos" id="legenda" aria-label="Povos do mapa"></ul>
+        </div>
+      </div>
+
+      <div class="tempo-controle">
+        <div class="tempo-botoes">
+          <button class="tempo-nav" id="t-ant" aria-label="Etapa anterior">←</button>
+          <button class="tempo-nav tempo-play" id="t-play" aria-label="Reproduzir linha do tempo">▶</button>
+          <button class="tempo-nav" id="t-prox" aria-label="Próxima etapa">→</button>
+        </div>
+        <ol class="tempo-linha" id="linha" aria-label="Linha do tempo"></ol>
+      </div>
+      <p class="tempo-legenda" id="tempo-legenda" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+<script src="assets/js/dados/mapa.js"></script>
+<script src="assets/js/dados/povos.js"></script>
+<script src="assets/js/icones.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/mapa-interativo.js"></script>
+</body>
+</html>

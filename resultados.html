@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resultados · A Representatividade Étnica na Música Gaúcha</title>
+  <meta name="description" content="O que aparece e o que não aparece na música gaúcha: resultados da análise.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&family=Parisienne&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-pagina="resultados">
+<main id="conteudo">
+  <section class="secao secao-topo">
+    <div class="container">
+      <span class="eyebrow">Resultados</span>
+      <h1>O que aparece<br>e o que não aparece?</h1>
+      <p class="lead">Os dados da análise revelam padrões de representação — e também grandes ausências na música gaúcha.</p>
+      <p class="aviso-pendente">Texto provisório: será revisado pela pesquisadora.</p>
+
+      <div class="kpis" id="kpis"></div>
+
+      <div class="resultados-layout">
+        <div>
+          <div class="abas" role="tablist" aria-label="Recortes dos resultados" id="abas">
+            <button role="tab" id="aba-grupos" aria-controls="painel-grupos" aria-selected="true">Grupos étnicos</button>
+            <button role="tab" id="aba-padronizacao" aria-controls="painel-padronizacao" aria-selected="false" tabindex="-1">Padronização</button>
+            <button role="tab" id="aba-artistas" aria-controls="painel-artistas" aria-selected="false" tabindex="-1">Por artista</button>
+            <button role="tab" id="aba-pluralidade" aria-controls="painel-pluralidade" aria-selected="false" tabindex="-1">Pluralidade</button>
+          </div>
+
+          <section class="painel grafico" role="tabpanel" id="painel-grupos" aria-labelledby="aba-grupos">
+            <h2>Quem é nomeado nas letras</h2>
+            <p class="grafico-sub">Número de músicas que identificam cada grupo étnico (uma música pode citar mais de um).</p>
+            <div id="g-grupos"></div>
+            <p class="grafico-nota" id="n-grupos"></p>
+            <details class="tabela"><summary>Ver as músicas de cada grupo</summary><div id="t-grupos"></div></details>
+          </section>
+
+          <section class="painel grafico" role="tabpanel" id="painel-padronizacao" aria-labelledby="aba-padronizacao" hidden>
+            <h2>Existe padronização identitária?</h2>
+            <p class="grafico-sub">Como cada música se posiciona diante da figura única do “gaúcho tradicional”.</p>
+            <div id="g-padronizacao"></div>
+            <p class="grafico-nota" id="n-padronizacao"></p>
+            <details class="tabela"><summary>Ver as músicas de cada categoria</summary><div id="t-padronizacao"></div></details>
+          </section>
+
+          <section class="painel grafico" role="tabpanel" id="painel-artistas" aria-labelledby="aba-artistas" hidden>
+            <h2>Padronização por artista</h2>
+            <p class="grafico-sub">Número de músicas de cada artista em cada categoria.</p>
+            <div id="g-artistas"></div>
+            <p class="grafico-nota" id="n-artistas"></p>
+            <details class="tabela"><summary>Ver a tabela</summary><div id="t-artistas"></div></details>
+          </section>
+
+          <section class="painel grafico" role="tabpanel" id="painel-pluralidade" aria-labelledby="aba-pluralidade" hidden>
+            <h2>Presença de pluralidade cultural</h2>
+            <p class="grafico-sub">Quanto cada música reconhece a diversidade cultural do Rio Grande do Sul.</p>
+            <div id="g-pluralidade"></div>
+            <p class="grafico-nota" id="n-pluralidade"></p>
+            <details class="tabela"><summary>Ver as músicas de cada categoria</summary><div id="t-pluralidade"></div></details>
+          </section>
+        </div>
+
+        <blockquote class="citacao">A música nativista não apresenta uma única visão da identidade gaúcha, mas sim uma disputa simbólica entre representações e invisibilizações.<svg class="ramo" viewBox="0 0 90 30" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24 C28 22 52 16 86 6"/><path d="M22 22 C20 15 25 11 30 10 C30 16 27 20 22 22Z M40 19 C40 12 45 9 50 9 C49 15 45 18 40 19Z M58 14 C59 8 64 5 69 6 C67 11 63 14 58 14Z M30 21 C35 25 41 25 45 22 C40 19 35 19 30 21Z M50 17 C55 21 61 21 64 17 C59 15 54 15 50 17Z"/></svg></blockquote>
+      </div>
+    </div>
+  </section>
+  <div class="dica" id="dica" role="tooltip" hidden></div>
+</main>
+<script src="assets/js/dados/analises.js"></script>
+<script src="assets/js/dados/letras.js"></script>
+<script src="assets/js/musicas-data.js"></script>
+<script src="assets/js/dados/resultados.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/resultados-graficos.js"></script>
+</body>
+</html>

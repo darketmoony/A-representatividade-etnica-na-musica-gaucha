@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>27 músicas, 5 perguntas · A Representatividade Étnica na Música Gaúcha</title>
+  <meta name="description" content="As 27 canções analisadas e os cinco eixos da análise.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&family=Parisienne&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-pagina="musicas">
+<main id="conteudo">
+  <section class="secao secao-topo">
+    <div class="container">
+      <span class="eyebrow">Corpus da pesquisa</span>
+      <h1>27 músicas, 5 perguntas</h1>
+      <p class="lead">Cada canção foi analisada a partir de cinco eixos:</p>
+      <ol class="eixos" id="eixos"></ol>
+
+      <div id="lista"></div>
+    </div>
+  </section>
+</main>
+<script src="assets/js/dados/analises.js"></script>
+<script src="assets/js/dados/letras.js"></script>
+<script src="assets/js/musicas-data.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+  (function () {
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+    var FOTOS = { "Elton Saldanha": "elton-saldanha", "César Passarinho": "cesar-passarinho", "Wilson Paim": "wilson-paim", "Luiz Marenco": "luiz-marenco" };
+    document.getElementById("eixos").innerHTML =
+      EIXOS.map(function (e) { return "<li>" + esc(e.titulo) + "</li>"; }).join("");
+
+    // Todas as músicas, agrupadas por artista (sem filtro).
+    document.getElementById("lista").innerHTML = ARTISTAS.map(function (artista) {
+      var doArtista = MUSICAS.filter(function (m) { return m.artista === artista; });
+      return '<section class="grupo-artista">' +
+        "<h2><img class=\"avatar\" src=\"assets/img/artista-" + FOTOS[artista] + ".jpg\" alt=\"\">" + esc(artista) + " <small>" + doArtista.length + " músicas</small></h2>" +
+        '<ul class="lista-musicas">' +
+        doArtista.map(function (m) {
+          return '<li><a class="musica-card" href="musica.html?id=' + m.id + '">' +
+            '<span class="num">' + String(m.n).padStart(2, "0") + "</span>" +
+            "<span><strong>" + esc(m.titulo) + '</strong><span class="ver">Ver análise →</span></span>' +
+            "</a></li>";
+        }).join("") +
+        "</ul></section>";
+    }).join("");
+  })();
+</script>
+</body>
+</html>

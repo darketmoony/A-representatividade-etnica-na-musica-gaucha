@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Análise da música · A Representatividade Étnica na Música Gaúcha</title>
+  <meta name="description" content="Análise individual da canção e sua letra.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&family=Parisienne&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-pagina="musica">
+<main id="conteudo">
+  <section class="secao secao-topo">
+    <div class="container" id="ficha">
+      <!-- preenchido pelo script abaixo a partir de assets/js/musicas-data.js -->
+    </div>
+  </section>
+</main>
+<script src="assets/js/dados/analises.js"></script>
+<script src="assets/js/dados/letras.js"></script>
+<script src="assets/js/musicas-data.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+  (function () {
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+    var alvo = document.getElementById("ficha");
+    var id = new URLSearchParams(location.search).get("id");
+    var i = -1;
+    MUSICAS.forEach(function (m, k) { if (m.id === id) i = k; });
+
+    if (i < 0) {
+      alvo.innerHTML = '<a class="voltar" href="musicas.html">← Voltar para as músicas</a>' +
+        "<h1>Música não encontrada</h1><p>Escolha uma canção na lista de músicas.</p>";
+      return;
+    }
+
+    var m = MUSICAS[i];
+    var ant = MUSICAS[i - 1];
+    var prox = MUSICAS[i + 1];
+    document.title = m.titulo + " · A Representatividade Étnica na Música Gaúcha";
+
+    // Cada eixo é uma lista de blocos: "parágrafo" | {r, t} rótulo+texto | {r, q:[...]} trechos citados
+    function bloco(b) {
+      if (typeof b === "string") return "<p>" + esc(b) + "</p>";
+      if (b.q) return '<p class="rotulo">' + esc(b.r) + "</p>" +
+        b.q.map(function (t) { return "<blockquote>“" + esc(t) + "”</blockquote>"; }).join("");
+      var r = /[?:]$/.test(b.r) ? b.r : b.r + ":";
+      return '<p><strong class="rotulo-inline">' + esc(r) + "</strong> " + esc(b.t) + "</p>";
+    }
+    var eixosHtml = EIXOS.map(function (e, k) {
+      var blocos = m.analise[e.chave] || [];
+      var corpo = blocos.length ? blocos.map(bloco).join("") : '<p class="vazio">Análise em preparação.</p>';
+      return '<div class="analise-eixo"><h3><span class="n">' + (k + 1) + "</span>" + esc(e.titulo) + "</h3>" + corpo + "</div>";
+    }).join("");
+
+    // Coluna da letra: letra completa (se publicada) ou trechos citados na análise + link.
+    var trechos = [];
+    EIXOS.forEach(function (e) {
+      (m.analise[e.chave] || []).forEach(function (b) {
+        if (b && b.q) b.q.forEach(function (t) { if (trechos.indexOf(t) < 0) trechos.push(t); });
+      });
+    });
+    // Remove trechos que já aparecem dentro de outro trecho maior.
+    function norm(t) { return t.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim(); }
+    trechos = trechos.filter(function (t) {
+      return !trechos.some(function (o) { return o !== t && norm(o).indexOf(norm(t)) >= 0 && norm(o) !== norm(t); });
+    });
+    var letraHtml = m.letra
+      ? '<h2 id="h-letra">Letra</h2><pre>' + esc(m.letra) + "</pre>"
+      : '<h2 id="h-letra">Trechos da letra</h2>' +
+        '<p class="nota">Versos citados na análise.</p>' +
+        (trechos.length
+          ? '<ul class="trechos">' + trechos.map(function (t) {
+              return "<li>" + esc(t).replace(/ \/ /g, "<br>") + "</li>";
+            }).join("") + "</ul>"
+          : '<p class="vazio">Sem trechos citados.</p>');
+    if (m.link) letraHtml += '<a class="btn btn-verde btn-letra" href="' + esc(m.link) + '" target="_blank" rel="noopener">Ler a letra completa</a>';
+
+    alvo.innerHTML =
+      '<a class="voltar" href="musicas.html">← Voltar para as músicas</a>' +
+      '<div class="ficha-topo"><div>' +
+        '<span class="eyebrow">Música ' + m.n + " de " + MUSICAS.length + "</span>" +
+        "<h1>" + esc(m.titulo) + "</h1>" +
+        '<p class="artista-nome">' + esc(m.artista) + (m.ano ? " · " + esc(m.ano) : "") + "</p>" +
+      "</div></div>" +
+      // Aviso de conteúdo: só aparece se o campo "aviso" estiver preenchido (texto aprovado pela pesquisa).
+      (m.aviso ? '<p class="aviso-pendente" role="note" style="margin-bottom:28px">' + esc(m.aviso) + "</p>" : "") +
+      '<div class="ficha">' +
+        '<section class="painel letra" aria-labelledby="h-letra">' + letraHtml + "</section>" +
+        '<section class="painel" aria-labelledby="h-analise"><h2 id="h-analise">Análise da música</h2>' + eixosHtml + "</section>" +
+      "</div>" +
+      '<nav class="ficha-nav" aria-label="Outras músicas">' +
+        (ant ? '<a href="musica.html?id=' + ant.id + '">← ' + esc(ant.titulo) + "</a>" : "<span></span>") +
+        (prox ? '<a href="musica.html?id=' + prox.id + '">' + esc(prox.titulo) + " →</a>" : "") +
+      "</nav>";
+  })();
+</script>
+</body>
+</html>
