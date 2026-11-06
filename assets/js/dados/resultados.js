@@ -4,7 +4,7 @@
      grupos       ← "Grupo étnico presente"
      padronizacao ← "Existe padronização identitária?"
      pluralidade  ← primeira frase de "Presença de pluralidade cultural"
-   REVISAR com a pesquisadora: mudar aqui atualiza todos os gráficos.
+   Revisado pela pesquisadora (2026-11-06). Mudar aqui atualiza todos os gráficos.
 
    grupos:       "negra" | "indigena" | "mestica"  (lista; vazia = nenhum grupo nomeado)
    padronizacao: "estereotipo" | "reforca" | "parcial" | "questiona"

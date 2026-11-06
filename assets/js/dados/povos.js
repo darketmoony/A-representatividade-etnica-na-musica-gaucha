@@ -1,6 +1,6 @@
 /* =========================================================
    Textos do mapa interativo — resumos do PFI (seção 2.2.2).
-   Revisar com a pesquisadora.
+   Revisado pela pesquisadora (2026-11-06).
 
    data    → texto curto mostrado na linha do tempo e na caixinha
    etapa   → id da etapa em que a região aparece no mapa
