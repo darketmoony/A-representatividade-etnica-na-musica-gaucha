@@ -13,3 +13,9 @@ Site estático (HTML, CSS e JavaScript). Para ver, abra `index.html` no navegado
 | Textos do mapa (povos) | `assets/js/dados/povos.js` |
 | Classificação usada nos gráficos | `assets/js/dados/resultados.js` |
 | Conceitos, festivais, biografias, sobre | HTML de cada página |
+
+## Licença
+
+- **Código** (HTML, CSS, JavaScript): [MIT](LICENSE).
+- **Conteúdo da pesquisa** (textos, análises, gráficos, mapa e ícones): [CC BY 4.0](LICENSE-conteudo).
+- Fotos dos artistas, capas de discos e trechos de letras **não** estão incluídos nessas licenças; os direitos pertencem aos respectivos titulares.
